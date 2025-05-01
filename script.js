@@ -1,5 +1,6 @@
 let surahs = document.querySelector('.surah-list'),
 overlay = document.querySelector('.overlay'),
+surahContainer = document.querySelector('.surah-container'),
 surahDetail = document.querySelector('.surah-detail'),
 closeBtn = document.getElementById('close');
 surahs.innerHTML = 'Loading surah list...';
@@ -25,6 +26,8 @@ $.ajax(settings).done(function(response){
 
 function openSurah(surahName){
 	overlay.classList.remove('hidden');
+	surahContainer.classList.add('scale-up');
+	surahContainer.classList.remove('scale-down');
 	const settings = {
 		async: true,
 		crossDomain: true,
@@ -52,6 +55,10 @@ function openSurah(surahName){
 }
 
 closeBtn.addEventListener('click', function(){
-	overlay.classList.add('hidden');
-	surahDetail.innerHTML = 'Loading surah...';
+	surahContainer.classList.remove('scale-up');
+	surahContainer.classList.add('scale-down');
+	setTimeout(function(){
+		overlay.classList.add('hidden');
+		surahDetail.innerHTML = 'Loading surah...';
+	}, 500);
 });
