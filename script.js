@@ -50,7 +50,6 @@ function openSurah(surahName){
 				<p class="english">${surah.english}</p>
 			`;
 		});
-		surahDetail.innerHTML += `<audio controls><source src="${response.audio}"></audio>`;
 	});
 }
 
