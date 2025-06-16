@@ -43,8 +43,8 @@ function openSurah(surahName){
 		surahDetail.innerHTML = `<h2>${response.surahName}</h2>`;
 		response.surah.forEach(surah => {
 			surahDetail.innerHTML += `
-				<p class="arabic">
-					<span>${surah.verse}</span> ${surah.arabic}
+				<p class="arabic" dir="rtl">
+					${surah.arabic} <span>${surah.verse}</span>
 				</p>
 				<p class="bangla">${surah.bangla}</p>
 				<p class="english">${surah.english}</p>
