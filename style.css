@@ -1,3 +1,7 @@
+:root{
+	--color1:#0d477d;
+	--color2: #397dbd;
+}
 *{
 	margin: 0;
 	padding: 0;
@@ -5,7 +9,7 @@
 }
 body{
 	min-height: 100vh;
-	background: #063256;
+	background: var(--color1);
 	padding: 15px;
 	font-family: sans-serif;
 	color: #fff;
@@ -23,7 +27,7 @@ h1{
 	gap: 15px;
 }
 .surah{
-	background: #2379a2;
+	background: var(--color2);
 	padding: 10px;
 	border-radius: 10px;
 	text-align: center;
@@ -65,7 +69,7 @@ h1{
 .surah-container{
 	width: 100%;
 	height: 100%;
-	background: #2379a2;
+	background: var(--color2);
 	border-radius: 10px;
 	padding: 15px;
 	position: relative;
@@ -91,12 +95,12 @@ h1{
 		& p{
 			margin-bottom: 10px;
 			&.arabic{
-				text-align: right;
-				font-size: 28px;
+				font-size: 30px;
 				& span{
 					border: 1px solid #fff;
 					border-radius: 50%;
-					padding: 5px 10px;
+					padding: 3px 8px;
+					font-size: 24px;
 				}
 			}
 			&.bangla, &.english{
