@@ -61,3 +61,14 @@ closeBtn.addEventListener('click', function(){
 		surahDetail.innerHTML = 'Loading surah...';
 	}, 500);
 });
+
+overlay.addEventListener('click', function(e){
+	if(!surahContainer.contains(e.target)){
+		surahContainer.classList.remove('scale-up');
+		surahContainer.classList.add('scale-down');
+		setTimeout(function(){
+			overlay.classList.add('hidden');
+			surahDetail.innerHTML = 'Loading surah...';
+		}, 500);
+	}
+});
