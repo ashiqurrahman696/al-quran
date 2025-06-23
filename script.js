@@ -20,7 +20,7 @@ $.ajax(settings).done(function(response){
 	surahs.innerHTML = '';
 	let surahlist = response.surahList;
 	surahlist.forEach(surahItem => {
-		surahs.innerHTML += `<div class="surah" onclick="openSurah('${surahItem.name.replace("'", "")}')">${surahItem.number}. ${surahItem.bangla} (${surahItem.name})</div>`;
+		surahs.innerHTML += `<div class="surah" onclick="openSurah('${surahItem.name.replace("'", "")}')">${surahItem.number}. <span lang="bn">${surahItem.bangla}</span> (${surahItem.name})</div>`;
 	});
 });
 
@@ -43,10 +43,10 @@ function openSurah(surahName){
 		surahDetail.innerHTML = `<h2>${response.surahName}</h2>`;
 		response.surah.forEach(surah => {
 			surahDetail.innerHTML += `
-				<p class="arabic" dir="rtl">
+				<p class="arabic" dir="rtl" lang="ar">
 					${surah.arabic} <span>${surah.verse}</span>
 				</p>
-				<p class="bangla">${surah.bangla}</p>
+				<p class="bangla" lang="bn">${surah.bangla}</p>
 				<p class="english">${surah.english}</p>
 			`;
 		});
