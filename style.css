@@ -89,12 +89,14 @@ h1{
 		cursor: pointer;
 	}
 	& .surah-detail{
-		& h2{
+		& h2, & div{
 			text-align: center;
 			margin-bottom: 20px;
 		}
-		& p{
+		& p, & hr{
 			margin-bottom: 10px;
+		}
+		& p{
 			&.arabic{
 				font-size: 30px;
 				& span{
@@ -109,7 +111,6 @@ h1{
 			}
 			&.english{
 				padding-bottom: 10px;
-				border-bottom: 1px solid #fff;
 			}
 		}
 	}
