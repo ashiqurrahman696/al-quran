@@ -1,9 +1,10 @@
 let surahs = document.querySelector('.surah-list'),
-overlay = document.querySelector('.overlay'),
-surahContainer = document.querySelector('.surah-container'),
-surahDetail = document.querySelector('.surah-detail'),
-closeBtn = document.getElementById('close');
+	overlay = document.querySelector('.overlay'),
+	surahContainer = document.querySelector('.surah-container'),
+	surahDetail = document.querySelector('.surah-detail'),
+	closeBtn = document.getElementById('close');
 surahs.innerHTML = 'Loading surah list...';
+surahDetail.innerHTML = 'Loading surah...';
 const settings = {
 	async: true,
 	crossDomain: true,
@@ -15,7 +16,7 @@ const settings = {
 	}
 };
 
-$.ajax(settings).done(function(response){
+$.ajax(settings).done(function (response) {
 	surahs.innerHTML = '';
 	let surahlist = response.surahList;
 	surahlist.forEach(surahItem => {
@@ -23,42 +24,7 @@ $.ajax(settings).done(function(response){
 	});
 });
 
-let banglaActive = true;
-let englishActive = true;
-let currentSurahData = null;
-
-function renderSurah() {
-	if (!currentSurahData) return;
-	surahDetail.innerHTML = `<h2>${currentSurahData.surahName}</h2>
-		<div>
-			<label><input type="checkbox" id="bangla-toggle" ${banglaActive ? 'checked' : ''}> Bangla</label>
-			<label><input type="checkbox" id="english-toggle" ${englishActive ? 'checked' : ''}> English</label>
-		</div>`;
-	currentSurahData.surah.forEach(surah => {
-		surahDetail.innerHTML += `
-			<p class="arabic" dir="rtl" lang="ar">
-				${surah.arabic} <span>${surah.verse}</span>
-			</p>`;
-		if (banglaActive) {
-			surahDetail.innerHTML += `<p class="bangla" lang="bn">${surah.bangla}</p>`;
-		}
-		if (englishActive) {
-			surahDetail.innerHTML += `<p class="english">${surah.english}</p>`;
-		}
-		surahDetail.innerHTML += `<hr>`;
-	});
-	// Re-attach event listeners after rendering
-	document.getElementById('bangla-toggle').addEventListener('change', function() {
-		banglaActive = this.checked;
-		renderSurah();
-	});
-	document.getElementById('english-toggle').addEventListener('change', function() {
-		englishActive = this.checked;
-		renderSurah();
-	});
-}
-
-function openSurah(surahName){
+function openSurah(surahName) {
 	overlay.classList.remove('hidden');
 	surahContainer.classList.add('scale-up');
 	surahContainer.classList.remove('scale-down');
@@ -74,30 +40,36 @@ function openSurah(surahName){
 		}
 	};
 
-	$.ajax(settings).done(function(response){
-		currentSurahData = response;
-		renderSurah();
+	$.ajax(settings).done(function (response) {
+		surahDetail.innerHTML = `<h2>${response.surahName}</h2>`;
+		response.surah.forEach(surah => {
+			surahDetail.innerHTML += `
+				<p class="arabic" dir="rtl" lang="ar">
+					${surah.arabic} <span>${surah.verse}</span>
+				</p>
+				<p class="bangla" lang="bn">${surah.bangla}</p>
+				<p class="english">${surah.english}</p>
+			`;
+		});
 	});
 }
 
-closeBtn.addEventListener('click', function(){
+closeBtn.addEventListener('click', function () {
 	surahContainer.classList.remove('scale-up');
 	surahContainer.classList.add('scale-down');
-	setTimeout(function(){
+	setTimeout(function () {
 		overlay.classList.add('hidden');
 		surahDetail.innerHTML = '';
-		currentSurahData = null;
 	}, 500);
 });
 
-overlay.addEventListener('click', function(e){
-	if(!surahContainer.contains(e.target)){
+overlay.addEventListener('click', function (e) {
+	if (!surahContainer.contains(e.target)) {
 		surahContainer.classList.remove('scale-up');
 		surahContainer.classList.add('scale-down');
-		setTimeout(function(){
+		setTimeout(function () {
 			overlay.classList.add('hidden');
 			surahDetail.innerHTML = '';
-			currentSurahData = null;
 		}, 500);
 	}
 });
